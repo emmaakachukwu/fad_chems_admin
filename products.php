@@ -22,12 +22,6 @@ function shorten_sring(string $var): string {
             <div class="title">
                 <h4><?php echo $heading ?? '' ?></h4>
             </div>
-            <nav aria-label="breadcrumb" role="navigation">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="./dashboard.php">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><?php echo $heading ?? '' ?></li>
-                </ol>
-            </nav>
         </div>
     </div>
     <a class="btn btn-primary text-white mt-4"><i class="fa fa-plus"></i> &nbsp; Add Product</a>
@@ -39,6 +33,7 @@ function shorten_sring(string $var): string {
             <th scope="col">#</th>
             <th scope="col">Image</th>
             <th scope="col">Name</th>
+            <th scope="col">Formula</th>
             <th scope="col">Price</th>
             <th scope="col">Description</th>
             <th scope="col">Created On</th>
@@ -55,6 +50,7 @@ function shorten_sring(string $var): string {
                             <?php } ?>
                         </td>
                         <td><?php echo $products[$i]->name ?></td>
+                        <td><?php echo $products[$i]->formula ?></td>
                         <td><?php echo $products[$i]->price ?></td>
                         <td><?php echo shorten_sring($products[$i]->description) ?></td>
                         <td><?php echo date('d M, Y h:i a', strtotime($products[$i]->created_at)) ?? '' ?></td>

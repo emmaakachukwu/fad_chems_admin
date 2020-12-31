@@ -25,7 +25,8 @@ $sql = "CREATE TABLE IF NOT EXISTS `products` (
     `name` VARCHAR(100) NOT NULL,
     `price` INT(50) NOT NULL,
     `desc` MEDIUMTEXT NULL,
-    `image_path` varchar(250) NULL,
+    `formula` VARCHAR(50) NULL,
+    `image_path` VARCHAR(100) NULL,
     `deleted_at` TIMESTAMP NULL,
 
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -33,36 +34,19 @@ $sql = "CREATE TABLE IF NOT EXISTS `products` (
 )";
 $link->query($sql);
 
-$sql = "CREATE TABLE IF NOT EXISTS `deposits` (
+$sql = "CREATE TABLE IF NOT EXISTS `payments` (
     `id` INT(50) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `user_id` INT(50) NOT NULL,
-    `amount` INT(50) NULL,
+    `email` VARCHAR(100) NOT NULL,
+    `amount` INT(50) NOT NULL,
+    `image_path` VARCHAR(100) NOT NULL,
     `approved_at` TIMESTAMP NULL,
 
-    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
-
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP NULL
 )";
 $link->query($sql);
 
-$sql = "CREATE TABLE IF NOT EXISTS `orders` (
-    `id` VARCHAR(100) NOT NULL PRIMARY KEY,
-    `user_id` INT(50) NOT NULL,
-    `product_id` INT(50) NOT NULL,
-    `quantity` INT(50) NOT NULL,
-    `paid` BOOLEAN DEFAULT TRUE,
-    `delivered_at` TIMESTAMP NULL,
-
-    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE CASCADE,
-
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` TIMESTAMP NULL
-)";
-$link->query($sql);
-
-$admin_email = 'admin@fadchems.com';
+$admin_email = 'admin@fadchemicals.com';
 $sql = "SELECT email FROM users WHERE email = '$admin_email' LIMIT 1";
 $result = $link->query($sql);
 if ( !$result->num_rows ) {

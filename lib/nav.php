@@ -90,30 +90,23 @@ $title = ucfirst($title ?? 'Home');
 					<li>
 						<span class="dropdown-toggle no-arrow">Administrator</span>
 					</li>
-					<li>
-						<a href="./dashboard.php" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-house-1"></span><span class="mtext">Dashboard</span>
-						</a>
-					</li>
-					<li>
-						<a href="./users.php" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-user-11"></span><span class="mtext">Users</span>
-						</a>
-					</li>
-					<li>
-						<a href="./products.php" class="dropdown-toggle no-arrow">
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon dw dw-house-1"></span><span class="mtext">Products</span>
 						</a>
+						<ul class="submenu">
+							<li><a href="./products.php">View Products</a></li>
+							<li><a href="./products.php">Add Products</a></li>
+						</ul>
 					</li>
-					<li>
-						<a href="./orders.php" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-exchange"></span><span class="mtext">Orders</span>
+					<li class="dropdown">
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-exchange"></span><span class="mtext">Payments</span>
 						</a>
-					</li>
-					<li>
-						<a href="./deposits.php" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-house-1"></span><span class="mtext">Deposits</span>
-						</a>
+						<ul class="submenu">
+							<li><a href="./payments.php?approved=false">UnApproved Payments</a></li>
+							<li><a href="./payments.php?approved=true">Approved Payments</a></li>
+						</ul>
 					</li>
 					<li>
 						<a href="./settings.php" class="dropdown-toggle no-arrow">
