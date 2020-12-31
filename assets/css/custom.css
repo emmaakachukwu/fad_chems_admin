@@ -1,0 +1,8 @@
+.nav-menu li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.nav-menu li a:hover {
+    text-decoration: underline;
+}
