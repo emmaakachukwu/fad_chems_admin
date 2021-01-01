@@ -2,22 +2,31 @@
 
 require_once "./../lib/config.php";
 
+// confirm id availablity
+if ( !isset($_GET['product_id']) || empty(trim($_GET['product_id'])) ) {
+    array_push($errors, 'Something went wrong.. please refresh');
+    check_errors($errors);
+} else {
+    $product_id = $_GET['product_id'];
+}
+
 $required = ['product_name'];
 validate_empty_fields($post, $required);
 
-$sql = $link->prepare("SELECT `name` FROM products WHERE `name` = ? LIMIT 1");
+$sql = $link->prepare("SELECT `name` FROM products WHERE `name` = ? AND id != $product_id LIMIT 1");
 $sql->bind_param("s", $product);
 if ( $sql->execute() ) {
     $sql->bind_result($_product);
     $sql->fetch();
     if ($_product) {
-        array_push($errors, 'Product already added');
+        array_push($errors, 'Product name already added');
     }
 }
 $sql->close();
 check_errors($errors);
 
-$newFileName = null;
+$newFileName = !isset($post['newFileName']) || empty(trim($post['newFileName'])) ? null : trim($post['newFileName']);
+
 if ( isset($_FILES['file']) && !empty(trim($_FILES['file']['name'])) ) {
     $target_dir = "./../uploads/products/";
     $target_file = $target_dir . basename($_FILES["file"]["name"]);
@@ -45,14 +54,13 @@ if ( isset($_FILES['file']) && !empty(trim($_FILES['file']['name'])) ) {
 }
 
 $at = date('Y-m-d H:i:s');
-$sql = $link->prepare("INSERT INTO `products` (`name`, price, formula, `desc`, image_path, created_at) VALUES (?, ?, ?, ?, ?, ?)");
-$sql->bind_param("ssssss", $product, $price, $formula, $description, $newFileName, $at);
+$sql = $link->prepare("UPDATE `products` SET `name`=?, price=?, formula=?, `desc`=?, image_path=?, updated_at=? WHERE id=?");
+$sql->bind_param("sssssss", $product, $price, $formula, $description, $newFileName, $at, $product_id);
 if ( $sql->execute() ) {
+    $_SESSION['success'] = ["Product updated"];
     $sql->close();
-    $_SESSION['success'] = ['Product added'];
-    on_success('add_product');
+    on_success('edit_product');
 }
-$sql->close();
 
 array_push($errors, 'Something went wrong; retry.. '.$link->error);
 

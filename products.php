@@ -46,7 +46,7 @@ function shorten_sring(string $var): string {
                         <td><?php echo  $i+1 ?></td>
                         <td>
                             <?php if ( isset($products[$i]->image_path) ) { ?>
-                                <img src="./uploads/products/<?php echo $products[$i]->image_path ?>" alt="<?php echo $products[$i]->name ?>" class="image-fluid table-image">
+                                <img src="./uploads/products/<?php echo $products[$i]->image_path ?>" alt="<?php echo $products[$i]->name ?>" class="image-fluid rounded table-image">
                             <?php } ?>
                         </td>
                         <td><?php echo $products[$i]->name ?></td>
@@ -54,7 +54,7 @@ function shorten_sring(string $var): string {
                         <td><?php echo number_format($products[$i]->price) ?></td>
                         <td><?php echo shorten_sring($products[$i]->desc) ?></td>
                         <td><?php echo date('d M, Y h:i a', strtotime($products[$i]->created_at)) ?? '' ?></td>
-                        <td><a class="btn btn-primary btn-sm text-white">Edit</a></td>
+                        <td><a href="./edit_product.php?product_id=<?php echo $products[$i]->id ?>" class="btn btn-primary btn-sm text-white">Edit</a></td>
                     </tr>
                 <?php } ?>
             </tbody>

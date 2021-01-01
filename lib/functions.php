@@ -83,16 +83,18 @@ function validate_empty_fields (array $post, array $required = []): void {
 function check_errors(array $errors): void {
     if ( count($errors) ) {
         $error_redirect = $GLOBALS['error_redirect'];
+        $params = count($_GET) ? '?'.http_build_query($_GET) : '';
 
         $errors = array_reverse($errors);
         $_SESSION['errors'] = $errors;
 
-        header("Location: ../".$error_redirect.".php");
+        header("Location: ../".$error_redirect.".php".$params);
         die();
     }
 }
 
 function on_success (string $path): void {
-    header("Location: ./../".$path.".php");
+    $params = count($_GET) ? '?'.http_build_query($_GET) : '';
+    header("Location: ./../".$path.".php".$params);
     die();
 }

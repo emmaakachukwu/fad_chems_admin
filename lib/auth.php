@@ -3,7 +3,8 @@
 require_once "./lib/config.php";
 
 if ( !isset($_SESSION['user']) || empty($_SESSION['user']) ) {
-    logout(false);
+    $from_route = basename($_SERVER['PHP_SELF'], '.php') == 'index';
+    logout($from_route);
 } else {
     $id = $_SESSION['user'];
 }
