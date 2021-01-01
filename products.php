@@ -11,7 +11,7 @@ if ( $result->num_rows ) {
 }
 
 function shorten_sring(string $var): string {
-    return strlen($var) > 20 ? substr($var, 0, 20).'...' : $var;
+    return strlen($var) > 25 ? substr($var, 0, 25).'...' : $var;
 }
 ?>
 
@@ -24,7 +24,7 @@ function shorten_sring(string $var): string {
             </div>
         </div>
     </div>
-    <a href="./add_product.php" class="btn btn-primary text-white mt-4"><i class="fa fa-plus"></i> &nbsp; Add Product</a>
+    <a href="./add_product.php" class="btn btn-primary text-white mt-3"><i class="fa fa-plus"></i> &nbsp; Add Product</a>
 </div>
 
 <div class="card-box pd-20 height-100-p mb-30">
@@ -46,13 +46,13 @@ function shorten_sring(string $var): string {
                         <td><?php echo  $i+1 ?></td>
                         <td>
                             <?php if ( isset($products[$i]->image_path) ) { ?>
-                                <img src="./uploads/products/<?php echo $products[$i]->image_path ?>" alt="<?php echo $products[$i]->name ?>" class="image-fluid">
+                                <img src="./uploads/products/<?php echo $products[$i]->image_path ?>" alt="<?php echo $products[$i]->name ?>" class="image-fluid table-image">
                             <?php } ?>
                         </td>
                         <td><?php echo $products[$i]->name ?></td>
                         <td><?php echo $products[$i]->formula ?></td>
-                        <td><?php echo $products[$i]->price ?></td>
-                        <td><?php echo shorten_sring($products[$i]->description) ?></td>
+                        <td><?php echo number_format($products[$i]->price) ?></td>
+                        <td><?php echo shorten_sring($products[$i]->desc) ?></td>
                         <td><?php echo date('d M, Y h:i a', strtotime($products[$i]->created_at)) ?? '' ?></td>
                         <td><a class="btn btn-primary btn-sm text-white">Edit</a></td>
                     </tr>

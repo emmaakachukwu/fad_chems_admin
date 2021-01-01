@@ -11,6 +11,12 @@ require_once "./lib/nav.php";
             <div class="title">
                 <h4><?php echo $heading ?? '' ?></h4>
             </div>
+            <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="./products.php">Products</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?php echo $heading ?></li>
+                </ol>
+            </nav>
         </div>
     </div>
 </div>

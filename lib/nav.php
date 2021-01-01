@@ -43,6 +43,11 @@ $title = ucfirst($title ?? 'Home');
 		table {
 			display: table !important;
 		}
+
+		.table-image {
+			width: 100px;
+			height: 100px;
+		}
 	</style>
 </head>
 <body>
