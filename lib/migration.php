@@ -46,10 +46,31 @@ $sql = "CREATE TABLE IF NOT EXISTS `payments` (
 )";
 $link->query($sql);
 
+$sql = "CREATE TABLE IF NOT EXISTS `wallets` (
+    `id` INT(50) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `type` VARCHAR(50) NOT NULL,
+    `wallet_id` VARCHAR(100) NOT NULL,
+
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP NULL
+)";
+$link->query($sql);
+
 $admin_email = 'admin@fadchemicals.com';
 $sql = "SELECT email FROM users WHERE email = '$admin_email' LIMIT 1";
 $result = $link->query($sql);
 if ( !$result->num_rows ) {
     $sql = "INSERT INTO users (username, email, fname, lname, password, role) VALUES ('fadchemsadmin', '$admin_email', 'fad', 'chemicals', 'fadchemspass100', 'admin')";
+    $link->query($sql);
+}
+
+$sql = "SELECT id FROM wallets LIMIT 1";
+$result = $link->query($sql);
+if ( !$result->num_rows ) {
+    $sql = "INSERT INTO wallets (`type`, wallet_id) VALUES
+            ('BitCoin', '1234567890'),
+            ('Ethereum', 'qwertyu'),
+            ('CashApp', '\$wawuwawu')
+        ";
     $link->query($sql);
 }
