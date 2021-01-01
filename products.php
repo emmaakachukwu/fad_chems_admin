@@ -24,7 +24,7 @@ function shorten_sring(string $var): string {
             </div>
         </div>
     </div>
-    <a class="btn btn-primary text-white mt-4"><i class="fa fa-plus"></i> &nbsp; Add Product</a>
+    <a href="./add_product.php" class="btn btn-primary text-white mt-4"><i class="fa fa-plus"></i> &nbsp; Add Product</a>
 </div>
 
 <div class="card-box pd-20 height-100-p mb-30">

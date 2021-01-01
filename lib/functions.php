@@ -50,20 +50,21 @@ function logout(bool $from_form = true): void {
     die();
 }
 
-function validate_empty_fields (array $post): void {
+function validate_empty_fields (array $post, array $required = []): void {
+    $required = count($required) ? $required : array_keys($post);
     $error_redirect = $GLOBALS['error_redirect'];
     $errors = [];
     $vars = [];
     foreach ( $post as $key => $value ) {
-        if ( empty(trim($value)) ) {
+        if ( empty(trim($value)) && in_array($key, $required) ) {
             array_push($errors, readable_key($key) . ' can not be empty');
         } else if ( $key != 'password' && $key != 'confirm_password' ) {
-            if ( $error_redirect == 'signup' )
+            if ( $error_redirect == 'add_product' )
                 $_SESSION[$key] = $value;
 
             $short_key = explode('_', $key)[0];
             global $$short_key;
-            $$short_key = strtolower(trim($value));
+            $$short_key = $key == 'email' ? strtolower(trim($value)) : trim($value);
         } else {
             $short_key = explode('_', $key)[0];
             global $$short_key;

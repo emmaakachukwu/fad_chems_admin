@@ -96,7 +96,7 @@ $title = ucfirst($title ?? 'Home');
 						</a>
 						<ul class="submenu">
 							<li><a href="./products.php">View Products</a></li>
-							<li><a href="./products.php">Add Products</a></li>
+							<li><a href="./add_product.php">Add Products</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
